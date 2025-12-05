@@ -17,6 +17,8 @@ export const invoices = sqliteTable('invoices', {
   company: text('company').notNull(), // JSON string
   lineItems: text('line_items').notNull(), // JSON string
   notes: text('notes'),
+  invoiceTitle: text('invoice_title').notNull().default('Invoice'),
+  footerMessage: text('footer_message'),
   template: text('template').notNull().default('default'),
   
   // Tiptap editor content

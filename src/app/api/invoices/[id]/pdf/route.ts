@@ -183,10 +183,8 @@ const styles = StyleSheet.create({
 // Helper function to format date as MM-DD-YYYY
 function formatDate(dateString: string): string {
   if (!dateString) return '';
-  const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
+  // Parse date string directly to avoid timezone issues
+  const [year, month, day] = dateString.split('T')[0].split('-');
   return `${month}-${day}-${year}`;
 }
 
@@ -271,7 +269,7 @@ function InvoicePDF({ invoice }: { invoice: any }) {
       ),
       
       // Footer
-      React.createElement(Text, { style: styles.footer }, "Thank you for your business!")
+      invoice.footerMessage && React.createElement(Text, { style: styles.footer }, invoice.footerMessage)
     )
   );
 }

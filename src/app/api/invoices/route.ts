@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       JSON.stringify(body.lineItems || []),
       body.notes || null,
       body.invoiceTitle || 'Invoice',
-      body.footerMessage || 'Thank you for your business!',
+      body.footerMessage || null,
       now,
       now
     ]);

@@ -401,12 +401,9 @@ export default function Dashboard() {
   // Utility function to format dates to MM-DD-YYYY
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: '2-digit',
-      day: '2-digit',
-      year: 'numeric'
-    });
+    // Parse date string directly to avoid timezone issues
+    const [year, month, day] = dateString.split('T')[0].split('-');
+    return `${month}-${day}-${year}`;
   };
   
   // Utility function to format times to HH:MM AM/PM

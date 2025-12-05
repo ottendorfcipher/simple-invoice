@@ -274,3 +274,4 @@ ecosystem.config.js
 
 # Sentry
 .sentryclirc
+invoice-data.json

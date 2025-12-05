@@ -38,6 +38,7 @@ interface InvoicePreviewProps {
   dueDate: string;
   currency: string;
   notes: string;
+  footerMessage?: string;
   customer: Customer;
   company: Company;
   lineItems: LineItem[];
@@ -55,10 +56,8 @@ interface InvoicePreviewProps {
 // Helper function to format date as MM-DD-YYYY
 function formatDate(dateString: string): string {
   if (!dateString) return '';
-  const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
+  // Parse date string directly to avoid timezone issues
+  const [year, month, day] = dateString.split('T')[0].split('-');
   return `${month}-${day}-${year}`;
 }
 
@@ -69,6 +68,7 @@ export default function InvoicePreview({
   dueDate,
   currency,
   notes,
+  footerMessage,
   customer,
   company,
   lineItems,
@@ -217,9 +217,11 @@ export default function InvoicePreview({
       )}
       
       {/* Footer */}
-      <div className="mt-10 text-center text-xs text-gray-500">
-        Thank you for your business!
-      </div>
+      {footerMessage && (
+        <div className="mt-10 text-center text-xs text-gray-500">
+          {footerMessage}
+        </div>
+      )}
     </div>
   );
 }

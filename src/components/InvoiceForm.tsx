@@ -258,8 +258,8 @@ export default function InvoiceForm({ invoice, isEditing = false }: InvoiceFormP
   const [dueDate, setDueDate] = useState(invoice?.dueDate || '');
   const [currency, setCurrency] = useState(invoice?.currency || 'USD');
   const [notes, setNotes] = useState(invoice?.notes || '');
-  const [invoiceTitle, setInvoiceTitle] = useState('Invoice');
-  const [footerMessage, setFooterMessage] = useState('Thank you for your business!');
+  const [invoiceTitle, setInvoiceTitle] = useState(invoice?.invoiceTitle || 'Invoice');
+  const [footerMessage, setFooterMessage] = useState(invoice?.footerMessage || '');
   const [taxRate, setTaxRate] = useState(() => {
     if (invoice?.tax && invoice?.subtotal) {
       return (invoice.tax / invoice.subtotal) * 100;
@@ -670,6 +670,8 @@ export default function InvoiceForm({ invoice, isEditing = false }: InvoiceFormP
         dueDate,
         currency,
         notes,
+        invoiceTitle,
+        footerMessage,
         customer,
         company,
         lineItems,
@@ -1680,6 +1682,7 @@ onBlur={() => {
                     dueDate={dueDate}
                     currency={currency}
                     notes={notes}
+                    footerMessage={footerMessage}
                     customer={customer}
                     company={company}
                     lineItems={lineItems}
